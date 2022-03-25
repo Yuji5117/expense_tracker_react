@@ -6,6 +6,7 @@ const Balance = () => {
     useContext(GlobalContext);
 
   const amounts = transactions.map((transaction) => transaction.amount);
+  // toFixed() = 固定小数点表記を用いて整形　2だと小数点第2位まで表示 0.00
   const total = amounts.reduce((acc, item) => acc + item, 0).toFixed(2);
 
   return (
