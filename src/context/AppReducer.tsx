@@ -1,8 +1,10 @@
-import { TransactionType } from "./GlobalState";
+import { InitialState, TransactionType } from "./GlobalState";
 
-// type Action = "DELETE_TRANSACTION";
+type Action =
+  | { type: "DELETE_TRANSACTION"; payload: number }
+  | { type: "ADD_TRANSACTION"; payload: TransactionType };
 
-const AppReducer = (state: any, action: any) => {
+const AppReducer = (state: InitialState, action: Action): InitialState => {
   switch (action.type) {
     case "DELETE_TRANSACTION":
       return {

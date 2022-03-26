@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext, TransactionType } from "../context/GlobalState";
 
 const AddTransaction = () => {
   const [text, setText] = useState<string>("");
@@ -7,10 +7,10 @@ const AddTransaction = () => {
 
   const { addTransaction } = useContext(GlobalContext);
 
-  const onSubmit = (e: any): void => {
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
 
-    const newTransaction = {
+    const newTransaction: TransactionType = {
       id: Math.floor(Math.random() * 10000000),
       text,
       amount: +amount,
@@ -28,7 +28,9 @@ const AddTransaction = () => {
           <input
             type="text"
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setText(e.target.value)
+            }
             placeholder="Enter text..."
           />
         </div>
@@ -39,11 +41,16 @@ const AddTransaction = () => {
           <input
             type="number"
             value={amount}
-            onChange={(e) => setAmount(parseInt(e.target.value))}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAmount(parseInt(e.target.value))
+            }
             placeholder="Enter amount..."
           />
         </div>
-        <button className="btn" onClick={(e) => onSubmit(e)}>
+        <button
+          className="btn"
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => onSubmit(e)}
+        >
           Add transaction
         </button>
       </form>
