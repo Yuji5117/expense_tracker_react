@@ -5,7 +5,11 @@ const AddTransaction = () => {
   const [text, setText] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
 
-  const { addTransaction } = useContext(GlobalContext);
+  const { dispatch } = useContext(GlobalContext);
+
+  const addTransaction = (transaction: TransactionType): void => {
+    dispatch({ type: "ADD_TRANSACTION", payload: transaction });
+  };
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();

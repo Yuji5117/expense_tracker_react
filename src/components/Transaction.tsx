@@ -2,8 +2,12 @@ import React, { useContext } from "react";
 import { GlobalContext, TransactionType } from "../context/GlobalState";
 
 const Transaction = ({ transaction }: { transaction: TransactionType }) => {
-  const { deleteTransaction } = useContext(GlobalContext);
+  const { dispatch } = useContext(GlobalContext);
   useContext(GlobalContext);
+
+  const deleteTransaction = (id: number): void => {
+    dispatch({ type: "DELETE_TRANSACTION", payload: id });
+  };
 
   const sign: string = transaction.amount < 0 ? "-" : "+";
   return (
